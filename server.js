@@ -8,7 +8,6 @@ const nunjucks = require('nunjucks');
 const path = require('path');
 const revConfig = require('./lib/rev-config');
 const revUrl = require('./lib/rev-url');
-const shrinkRay = require('shrink-ray');
 const urlParser = require('url');
 const formatDate = require('./lib/format-date');
 const renderAvatar = require('./lib/render-avatar');
@@ -67,7 +66,6 @@ app.use('*/index.html', (req, res) => res.redirect(301, `${path.dirname(req.orig
 app.set('etag', true);
 app.use(helmet());
 app.use(revConfig.pattern, cacheControlImmutable);
-app.use(shrinkRay());
 app.use(express.static(path.join(__dirname, config.cacheDir), {index: false, lastModified: false}));
 
 /**
